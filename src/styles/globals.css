@@ -1,0 +1,416 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.animate-underline-grow {
+    position: relative;
+}
+
+.animate-underline-grow::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0; /* Starts at 0 width */
+    height: 4px; /* Thickness of the line */
+    background-color: #ddff00; /* Color of the line (can be customized) */
+    transition: width 0.3s ease-out; /* The animation effect */
+}
+
+/* On hover, expand the line from 0 width to 100% width */
+.animate-underline-grow:hover::after {
+    width: 100%;
+}
+/* Custom CSS for Hamburger Icon Animation */
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 28px; /* Standard width */
+    height: 28px; /* Standard height */
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.hamburger-line {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #DDFF00; /* Your neon color */
+    border-radius: 3px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* State when menu is OPEN (X Icon) */
+.hamburger-icon.active .line-top {
+    transform: translateY(12.5px) rotate(45deg);
+}
+
+.hamburger-icon.active .line-middle {
+    opacity: 0;
+}
+
+.hamburger-icon.active .line-bottom {
+    transform: translateY(-12.5px) rotate(-45deg);
+}
+
+/* strategy.css */
+
+/* --- UPDATED CSS FOR THE 4 + 1 LAYOUT --- */
+
+/* Base Styles (Keep these the same) */
+.insights-section {
+    padding: 60px 20px;
+    background-color: #f0f0f0; 
+    font-family: Arial, sans-serif;
+}
+
+.insights-grid {
+    display: grid;
+    /* Define a 12-column grid to allow precise centering */
+    grid-template-columns: repeat(12, 1fr);
+    gap: 30px; 
+    max-width: 1300px; /* Slightly wider max width might look better for 4 columns */
+    margin: 0 auto; 
+    padding: 20px 0;
+}
+
+/* --- Positioning for the Four Top Cards (1, 2, 3, 4) --- */
+.insight-card-4-col {
+    /* Each card takes up 3 columns (3 * 4 = 12 total columns) */
+    grid-column: span 4;
+    
+    /* Inherit the common card styles from below or place them here */
+    background-color: #ffffff; 
+    border: 1px solid #e7e7e7; 
+    padding: 30px;
+    border-radius: 4px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); 
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* --- Positioning for the Centered Card (5) --- */
+.insight-card-center {
+    /* Start at column 4, and span 6 columns (4 + 6 + 2 = 12 total) */
+    /* This centers it perfectly in the middle */
+    grid-column: 5 / span 6;
+
+    /* Inherit the common card styles from below or place them here */
+    background-color: #ffffff; 
+    border: 1px solid #e7e7e7; 
+    padding: 30px;
+    border-radius: 4px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); 
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* --- Mobile Responsiveness (Important!) --- */
+@media (max-width: 1024px) {
+    /* Switch to 2 columns on smaller desktops/tablets */
+    .insights-grid {
+        grid-template-columns: 1fr 1fr; /* 2 columns */
+    }
+    .insight-card-4-col {
+        grid-column: span 1; /* Each card takes half the space */
+    }
+    .insight-card-center {
+        /* On smaller screens, the centered card should just span both columns */
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Switch to 1 column on mobile phones */
+    .insights-grid {
+        grid-template-columns: 1fr; /* 1 column */
+    }
+    .insight-card-4-col, .insight-card-center {
+        grid-column: span 1; 
+    }
+}
+
+
+/* --- Remaining Common Card Styles (Keep these the same) --- */
+
+.insight-card-category {
+    font-size: 13px;
+    font-weight: bold;
+    color: #444;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.insight-card-category::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 2px;
+    background-color: #98b000;
+}
+
+.insight-card-title {
+    font-size: 26px; 
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.insight-card-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 25px; 
+    flex-grow: 1;
+}
+
+.insight-card-link {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+
+.insight-card-link:hover {
+    color: #000;
+}
+
+.arrow-icon {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin-right: 10px;
+    line-height: 1;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.insight-card-link:hover .arrow-icon {
+    background-color: #adc701;
+}
+/* --- CSS for the New Header Text --- */
+
+.page-header-text {
+    /* Align with the max-width of the grid container */
+    max-width: 1300px; 
+    margin: 0 auto;
+    padding: 0 20px 20px 20px; /* Add padding to the bottom of the header */
+    font-size: 20px;
+    color: #3d3939; /* Subtle gray color */
+    text-transform: uppercase; /* Ensures the text is in small letters as requested */
+    font-weight: normal;
+    text-align: left;
+}
+
+/* Ensure mobile padding respects the grid padding */
+@media (max-width: 1340px) {
+    /* The grid has padding: 0 20px, so the header padding should match */
+    .page-header-text {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* contact global.css */
+
+.contact-section {
+     font-family: Arial, Helvetica, sans-serif;
+    padding: 80px 20px;
+    background-color: #f9f9f9; /* Light background */
+  
+}
+
+.contact-content-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.contact-heading {
+    font-size: 22px;
+    color: #302f2f;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 40px;
+}
+
+/* --- Cards Layout (Side-by-Side on Desktop) --- */
+.investor-card, .sponsor-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 30px;
+   
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    height: 100%; /* Important for equal height in a grid/flex container */
+}
+
+/* Wrap cards in a container for the side-by-side layout */
+
+@media (max-width: 768px) {
+    .contact-heading + div {
+        flex-direction: column;
+    }
+}
+
+
+.contact-card-title {
+    font-size: 24px;
+    color: #000000;
+    margin-top: 0;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.contact-next-step {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #eee;
+    font-size: 15px;
+    color: #555;
+}
+
+/* --- Contact Channels Table --- */
+.contact-channels {
+    margin-bottom: 40px;
+}
+
+.channels-heading {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 15px;
+}
+.contact-card-text{
+    color: #676565;
+}
+
+
+.channels-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.channels-table th, .channels-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: black;
+}
+
+.channels-table th {
+    background-color: #000; /* Dark header */
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* --- CTA Buttons --- */
+.contact-cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center; /* Center buttons */
+    padding: 20px 0;
+}
+
+.cta-button {
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.investor-cta {
+    background-color: #000000; /* Primary blue color */
+    color: rgb(255, 255, 255);
+}
+
+.dealflow-cta {
+    background-color: #000000; /* Secondary red color */
+    color: rgb(255, 255, 255);
+    
+}
+
+.cta-button:hover {
+    opacity: 0.9;
+
+}
+
+@media (max-width: 500px) {
+    .contact-cta-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* footer.css or add to global.css */
+
+.final-footer-line {
+    /* Subtle background to separate it from the main content */
+    background-color: #eee; 
+    padding: 20px 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    border-top: 1px solid #ddd; /* A thin line for definition */
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+}
+
+.final-footer-line p {
+    margin: 0; /* Remove default paragraph margin */
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.hover\:text-neon:hover {
+  color: #ddff00 !important;
+}
